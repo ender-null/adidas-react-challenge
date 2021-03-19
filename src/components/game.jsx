@@ -21,6 +21,7 @@ export const Game = () => {
   };
 
   useEffect(() => {
+    document.title = `React Challenge: Round ${round}`;
     localStorage.setItem("round", round);
   }, [round]);
 

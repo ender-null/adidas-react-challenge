@@ -1,3 +1,5 @@
+$button-color: #69d695
+  
 body
   margin: 0
   font-size: 14px
@@ -25,3 +27,52 @@ body
   height: 100vh
   align-items: center
   justify-content: center
+
+.overlay
+  position: absolute
+  background: rgba(0,0,0,0.7)
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  display: flex
+  align-items: center
+  justify-content: center
+
+.dialog
+  background: white
+  border-radius: 8px 
+  box-shadow: 0 3px 8px 4px rgba(0, 0, 0, 0.2)
+  padding: 20px 15px
+
+  form
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.header
+  font-size: 24px
+  margin: 0
+
+.button, .input
+  padding: 5px 10px
+  border: none
+  outline: none
+
+.button
+  background: $button-color
+  border-radius: 50px
+  width: 100%
+
+  &:hover
+    background: lighten($button-color, 10%)
+
+  &:active
+    background: darken($button-color, 10%)
+
+.input
+  background: #eee
+  border-radius: 4px
+  box-shadow: 0 0 0 1px #e1e1e1
+  margin: 5px 0 10px
+  

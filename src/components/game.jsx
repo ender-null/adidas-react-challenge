@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { Board } from "./board.jsx";
 import { Dialog } from "./dialog.jsx";
 import { Ranking } from "./ranking.jsx";
@@ -6,6 +7,7 @@ import { Ranking } from "./ranking.jsx";
 export const Game = () => {
   const savedRound = Number(localStorage.getItem("round"));
   const savedRanking = JSON.parse(localStorage.getItem("ranking"));
+  const [title, setTitle] = useState(null);
   const [round, setRound] = useState(savedRound || 0);
   const [ranking, setRanking] = useState(savedRanking || []);
   const [dialog, setDialog] = useState(false);
@@ -25,13 +27,14 @@ export const Game = () => {
 
   const handleFail = () => {
     setDialog(true);
+    setTitle(`React Challenge: Game over`);
   };
 
   useEffect(() => {
     if (round >= 0) {
-      document.title = `React Challenge: Round ${round}`;
+      setTitle(`React Challenge: Round ${round}`);
     } else {
-      document.title = `React Challenge`;
+      setTitle(`React Challenge`);
     }
     localStorage.setItem("round", round);
   }, [round]);
@@ -46,6 +49,13 @@ export const Game = () => {
 
   return (
     <div className="game">
+      <Helmet>
+        <title>{title}</title>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+        />
+      </Helmet>
       <Board round={round} onSuccess={handleSuccess} onFail={handleFail} />
       {dialog && (
         <Dialog

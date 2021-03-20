@@ -1,31 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-export const Dialog = ({ round, ranking, onSubmit }) => {
-  const [name, setName] = useState("");
+export const Dialog = ({ step, previousName, onSetName, onAddEntry, onCancel }) => {
+  const [name, setName] = useState(previousName);
 
   const handleInput = (event) => {
     setName(event.target.value);
   };
 
-  const handleSubmit = () => {
-    ranking.push({ name, round });
-    localStorage.setItem("ranking", JSON.stringify(ranking));
-    onSubmit();
-  };
+  useEffect(()=> {
+    onSetName(name);
+  }, [name])
 
   return (
     <div className="overlay">
       <div className="dialog">
-        <form onSubmit={handleSubmit}>
+        <button className="close-button" onClick={onCancel}>🗙</button>
+        <form onSubmit={onAddEntry}>
           <h2 className="header">Wrong tile!</h2>
-          <input
+          { step > 0 && <span>You got to step <strong>{step}</strong></span>}
+          { step > 0 && <input
             className="input"
+            value={name}
             onChange={handleInput}
             placeholder="Write your name"
             autoFocus
           ></input>
-          <button className="button" disabled={name.length === 0} type="submit">
-            Confirm
+          }
+          <button className="button" disabled={name.length === 0 && step > 0} type="submit">
+            Accept
           </button>
         </form>
       </div>

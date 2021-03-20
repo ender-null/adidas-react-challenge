@@ -3,10 +3,10 @@ import { Tile } from "./tile.jsx";
 
 const BoardWidth = 320;
 
-export const Board = ({ round, onSuccess, onFail }) => {
+export const Board = ({ step, onSuccess, onFail }) => {
   const [tiles, setTiles] = useState(null);
 
-  const getSize = () => round + 2;
+  const getSize = () => step + 2;
 
   const createTile = (differentTileIndex, color) => (_, index) => {
     const isDifferent = index === differentTileIndex;
@@ -38,12 +38,12 @@ export const Board = ({ round, onSuccess, onFail }) => {
 
   useEffect(() => {
     createTiles();
-  }, [round]);
+  }, [step]);
 
   return (
     <div className="board">
       <div className="status">
-        Round: <strong>{round}</strong>
+        Step: <strong>{step}</strong>
       </div>
       <div
         className="tiles"

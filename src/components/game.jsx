@@ -1,45 +1,60 @@
 import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
 import { Board } from "./board.jsx";
 import { Dialog } from "./dialog.jsx";
 import { Ranking } from "./ranking.jsx";
 
 export const Game = () => {
-  const savedRound = Number(localStorage.getItem("round"));
+  const savedStep = Number(localStorage.getItem("step"));
   const savedRanking = JSON.parse(localStorage.getItem("ranking"));
-  const [title, setTitle] = useState(null);
-  const [round, setRound] = useState(savedRound || 0);
+  const [step, setStep] = useState(savedStep || 0);
+  const [name, setName] = useState('');
   const [ranking, setRanking] = useState(savedRanking || []);
-  const [dialog, setDialog] = useState(false);
-
-  const handleNewGame = () => {
-    setRound(0);
-  };
-
-  const handleAddEntry = () => {
-    setDialog(false);
-    setRound(-1);
-  };
+  const [showDialog, setShowDialog] = useState(false);
 
   const handleSuccess = () => {
-    setRound(round + 1);
+    setStep(step + 1);
   };
 
   const handleFail = () => {
-    setDialog(true);
-    setTitle(`React Challenge: Game over`);
+    setShowDialog(true);
+    document.title = 'React Challenge: Game over';
   };
 
-  useEffect(() => {
-    if (round >= 0) {
-      setTitle(`React Challenge: Round ${round}`);
-    } else {
-      setTitle(`React Challenge`);
-    }
-    localStorage.setItem("round", round);
-  }, [round]);
+  const handleNewGame = () => {
+    setStep(0);
+  };
 
-  if (round < 0) {
+  const handleAddEntry = () => {
+    if (step > 0) {
+      const newRanking = [...ranking];
+      newRanking.push({ name, step });
+      newRanking.sort((a, b) => {
+        return b.step - a.step;
+      })
+      setRanking(newRanking.slice(0, 10));
+      localStorage.setItem("ranking", JSON.stringify(ranking));
+      setStep(-1);
+    }
+    setShowDialog(false);
+  };
+
+  const handleCancel = () => {
+    if (step > 0) {
+      setStep(-1);
+    }
+    setShowDialog(false);
+  }
+
+  useEffect(() => {
+    if (step >= 0) {
+      document.title = `React Challenge: Step ${step}`;
+    } else {
+      document.title = 'React Challenge';
+    }
+    localStorage.setItem("step", step);
+  }, [step]);
+
+  if (step < 0) {
     return (
       <div className="game">
         <Ranking ranking={ranking} onNewGame={handleNewGame}></Ranking>
@@ -49,21 +64,8 @@ export const Game = () => {
 
   return (
     <div className="game">
-      <Helmet>
-        <title>{title}</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        />
-      </Helmet>
-      <Board round={round} onSuccess={handleSuccess} onFail={handleFail} />
-      {dialog && (
-        <Dialog
-          ranking={ranking}
-          round={round}
-          onSubmit={handleAddEntry}
-        ></Dialog>
-      )}
+      <Board step={step} onSuccess={handleSuccess} onFail={handleFail} />
+      {showDialog && (<Dialog onSetName={setName} previousName={name} step={step} onAddEntry={handleAddEntry} onCancel={handleCancel}></Dialog>)}
     </div>
   );
 };

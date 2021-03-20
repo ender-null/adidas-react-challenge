@@ -3,12 +3,12 @@ import React from "react";
 export const Ranking = ({ ranking, onNewGame }) => {
   return (
     <div className="ranking">
-      <h1 className="header">Ranking</h1>
+      <h1 className="header">Hall of fame</h1>
       <ol>
         {ranking.map((entry, index) => {
           return (
             <li key={index}>
-              <strong>{entry.name}</strong>: Round {entry.round}
+              <strong>{entry.name}</strong>: {entry.round}
             </li>
           );
         })}

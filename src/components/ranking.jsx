@@ -14,7 +14,7 @@ export const Ranking = ({ ranking, onNewGame }) => {
         })}
       </ol>
       <button className="button" onClick={onNewGame}>
-        New Game
+        New game
       </button>
     </div>
   );

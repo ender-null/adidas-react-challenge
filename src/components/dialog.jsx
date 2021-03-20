@@ -14,7 +14,7 @@ export const Dialog = ({ step, previousName, onSetName, onAddEntry, onCancel }) 
   return (
     <div className="overlay">
       <div className="dialog">
-        <button className="close-button" onClick={onCancel}>🗙</button>
+        <button className="close-button" onClick={onCancel}>X</button>
         <form onSubmit={onAddEntry}>
           <h2 className="header">Wrong tile!</h2>
           { step > 0 && <span>You got to step <strong>{step}</strong></span>}

@@ -8,7 +8,7 @@ export const Ranking = ({ ranking, onNewGame }) => {
         {ranking.map((entry, index) => {
           return (
             <li key={index}>
-              <strong>{entry.name}</strong>: {entry.round}
+              <strong>{entry.name}</strong>: {entry.step}
             </li>
           );
         })}

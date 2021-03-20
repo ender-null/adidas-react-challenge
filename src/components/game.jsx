@@ -4,9 +4,11 @@ import { Dialog } from "./dialog.jsx";
 import { Ranking } from "./ranking.jsx";
 
 export const Game = () => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [step, setStep] = useState(Number(localStorage.getItem("step")) || 0);
-  const [ranking, setRanking] = useState(JSON.parse(localStorage.getItem("ranking")) || []);
+  const [ranking, setRanking] = useState(
+    JSON.parse(localStorage.getItem("ranking")) || []
+  );
   const [showDialog, setShowDialog] = useState(false);
 
   const handleSuccess = () => {
@@ -27,7 +29,7 @@ export const Game = () => {
       newRanking.push({ name, step });
       newRanking.sort((a, b) => {
         return b.step - a.step;
-      })
+      });
       setRanking(newRanking.slice(0, 10));
       setStep(-1);
     }
@@ -41,7 +43,7 @@ export const Game = () => {
       setStep(0);
     }
     setShowDialog(false);
-  }
+  };
 
   useEffect(() => {
     localStorage.setItem("step", step);
@@ -62,7 +64,15 @@ export const Game = () => {
   return (
     <div className="game">
       <Board step={step} onSuccess={handleSuccess} onFail={handleFail} />
-      {showDialog && (<Dialog onSetName={setName} previousName={name} step={step} onAddEntry={handleAddEntry} onCancel={handleCancel}></Dialog>)}
+      {showDialog && (
+        <Dialog
+          onSetName={setName}
+          previousName={name}
+          step={step}
+          onAddEntry={handleAddEntry}
+          onCancel={handleCancel}
+        ></Dialog>
+      )}
     </div>
   );
 };

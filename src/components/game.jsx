@@ -41,6 +41,8 @@ export const Game = () => {
   const handleCancel = () => {
     if (step > 0 && ranking.length > 0) {
       setStep(-1);
+    } else {
+      setStep(0);
     }
     setShowDialog(false);
   }

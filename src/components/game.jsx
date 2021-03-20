@@ -4,11 +4,9 @@ import { Dialog } from "./dialog.jsx";
 import { Ranking } from "./ranking.jsx";
 
 export const Game = () => {
-  const savedStep = Number(localStorage.getItem("step"));
-  const savedRanking = JSON.parse(localStorage.getItem("ranking"));
-  const [step, setStep] = useState(savedStep || 0);
   const [name, setName] = useState('');
-  const [ranking, setRanking] = useState(savedRanking || []);
+  const [step, setStep] = useState(Number(localStorage.getItem("step")) || 0);
+  const [ranking, setRanking] = useState(JSON.parse(localStorage.getItem("ranking")) || []);
   const [showDialog, setShowDialog] = useState(false);
 
   const handleSuccess = () => {
@@ -17,7 +15,6 @@ export const Game = () => {
 
   const handleFail = () => {
     setShowDialog(true);
-    document.title = 'React Challenge: Game over';
   };
 
   const handleNewGame = () => {
@@ -32,7 +29,6 @@ export const Game = () => {
         return b.step - a.step;
       })
       setRanking(newRanking.slice(0, 10));
-      localStorage.setItem("ranking", JSON.stringify(ranking));
       setStep(-1);
     }
     setShowDialog(false);
@@ -48,13 +44,12 @@ export const Game = () => {
   }
 
   useEffect(() => {
-    if (step >= 0) {
-      document.title = `React Challenge: Step ${step}`;
-    } else {
-      document.title = 'React Challenge';
-    }
     localStorage.setItem("step", step);
   }, [step]);
+
+  useEffect(() => {
+    localStorage.setItem("ranking", JSON.stringify(ranking));
+  }, [ranking]);
 
   if (step < 0) {
     return (

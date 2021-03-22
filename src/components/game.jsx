@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Board } from "./board.jsx";
-import { Dialog } from "./dialog.jsx";
+import { EndGameDialog } from "./end-game-dialog.jsx";
 import { Ranking } from "./ranking.jsx";
 
 export const Game = () => {
@@ -69,13 +69,13 @@ export const Game = () => {
     <div className="game">
       <Board step={step} onSuccess={handleSuccess} onFail={handleFail} />
       {showDialog && (
-        <Dialog
+        <EndGameDialog
           onSetName={setName}
           previousName={name}
           step={step}
           onAddEntry={handleAddEntry}
           onCancel={handleCancel}
-        ></Dialog>
+        ></EndGameDialog>
       )}
     </div>
   );

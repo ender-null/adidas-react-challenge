@@ -5,7 +5,6 @@ export const Ranking = ({ ranking, onNewGame }) => {
   orderedRanking.sort(([, stepA], [, stepB]) => {
     return stepB - stepA;
   });
-  console.log(orderedRanking);
 
   return (
     <div className="ranking">

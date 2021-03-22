@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`end-game-dialog should render the component 1`] = `
+<DocumentFragment>
+  <div
+    class="overlay"
+  >
+    <div
+      class="dialog"
+    >
+      <button
+        class="close-button"
+        id="end-game-dialog-submit"
+      >
+        X
+      </button>
+      <form>
+        <h2
+          class="header"
+        >
+          Wrong tile!
+        </h2>
+        <button
+          class="button"
+          disabled=""
+          id="end-game-dialog-submit"
+          type="submit"
+        >
+          Accept
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`end-game-dialog should render the component with step 1`] = `
+<DocumentFragment>
+  <div
+    class="overlay"
+  >
+    <div
+      class="dialog"
+    >
+      <button
+        class="close-button"
+        id="end-game-dialog-submit"
+      >
+        X
+      </button>
+      <form>
+        <h2
+          class="header"
+        >
+          Wrong tile!
+        </h2>
+        <span>
+          You got to step 
+          <strong>
+            24
+          </strong>
+        </span>
+        <input
+          class="input"
+          id="end-game-dialog-input"
+          placeholder="Write your name"
+          value=""
+        />
+        <button
+          class="button"
+          disabled=""
+          id="end-game-dialog-submit"
+          type="submit"
+        >
+          Accept
+        </button>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;

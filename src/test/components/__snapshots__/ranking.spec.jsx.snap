@@ -32,36 +32,3 @@ exports[`Ranking should render the component 1`] = `
   </div>
 </DocumentFragment>
 `;
-
-exports[`Ranking should render the component 2`] = `
-<DocumentFragment>
-  <div
-    class="ranking"
-  >
-    <h1
-      class="header"
-    >
-      Hall of fame
-    </h1>
-    <ol>
-      <li>
-        <strong>
-          Name
-        </strong>
-        : 24
-      </li>
-      <li>
-        <strong>
-          SecondName
-        </strong>
-        : 16
-      </li>
-    </ol>
-    <button
-      class="button"
-    >
-      New game
-    </button>
-  </div>
-</DocumentFragment>
-`;

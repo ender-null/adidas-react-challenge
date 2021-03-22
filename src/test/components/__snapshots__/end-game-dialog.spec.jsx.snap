@@ -22,7 +22,6 @@ exports[`end-game-dialog should render the component 1`] = `
         </h2>
         <button
           class="button"
-          disabled=""
           id="end-game-dialog-submit"
           type="submit"
         >

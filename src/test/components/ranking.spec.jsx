@@ -19,7 +19,7 @@ describe("Ranking", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  test("should render the component", () => {
+  test("should run call onNewGame when clicked", () => {
     testOnNewGame.mockImplementation((event) => {
       event.preventDefault();
     });

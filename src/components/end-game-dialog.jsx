@@ -47,7 +47,7 @@ export const EndGameDialog = ({
           <button
             id="end-game-dialog-submit"
             className="button"
-            disabled={(name || name.length === 0) && step > 0}
+            disabled={(!name || name.length === 0) && step > 0}
             type="submit"
           >
             Accept

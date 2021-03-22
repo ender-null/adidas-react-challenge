@@ -1,14 +1,20 @@
 import React from "react";
 
 export const Ranking = ({ ranking, onNewGame }) => {
+  const orderedRanking = Object.entries(ranking);
+  orderedRanking.sort(([, stepA], [, stepB]) => {
+    return stepB - stepA;
+  });
+  console.log(orderedRanking);
+
   return (
     <div className="ranking">
       <h1 className="header">Hall of fame</h1>
       <ol>
-        {ranking.map((entry, index) => {
+        {orderedRanking.map(([name, step], index) => {
           return (
             <li key={index}>
-              <strong>{entry.name}</strong>: {entry.step}
+              <strong>{name}</strong>: {step}
             </li>
           );
         })}

@@ -7,9 +7,11 @@ export const Game = () => {
   const [name, setName] = useState("");
   const [step, setStep] = useState(Number(localStorage.getItem("step")) || 0);
   const [ranking, setRanking] = useState(
-    JSON.parse(localStorage.getItem("ranking")) || []
+    JSON.parse(localStorage.getItem("ranking")) || {}
   );
-  const [showDialog, setShowDialog] = useState(false);
+  const [showDialog, setShowDialog] = useState(
+    localStorage.getItem("show_dialog")
+  );
 
   const handleSuccess = () => {
     setStep(step + 1);
@@ -25,12 +27,10 @@ export const Game = () => {
 
   const handleAddEntry = () => {
     if (step > 0) {
-      const newRanking = [...ranking];
-      newRanking.push({ name, step });
-      newRanking.sort((a, b) => {
-        return b.step - a.step;
+      setRanking({
+        ...ranking,
+        [name]: ranking[name] && ranking[name] > step ? ranking[name] : step,
       });
-      setRanking(newRanking.slice(0, 10));
       setStep(-1);
     }
     setShowDialog(false);
@@ -52,6 +52,10 @@ export const Game = () => {
   useEffect(() => {
     localStorage.setItem("ranking", JSON.stringify(ranking));
   }, [ranking]);
+
+  useEffect(() => {
+    localStorage.setItem("show_dialog", showDialog);
+  }, [showDialog]);
 
   if (step < 0) {
     return (

@@ -10,7 +10,7 @@ export const EndGameDialog = ({
   const [name, setName] = useState(previousName);
 
   const handleInput = (event) => {
-    setName(event.target.value);
+    setName(event.target.value.trim());
   };
 
   useEffect(() => {

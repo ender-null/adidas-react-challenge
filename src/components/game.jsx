@@ -10,7 +10,7 @@ export const Game = () => {
     JSON.parse(localStorage.getItem("ranking")) || {}
   );
   const [showDialog, setShowDialog] = useState(
-    localStorage.getItem("show_dialog")
+    localStorage.getItem("show_dialog") === "true"
   );
 
   const handleSuccess = () => {

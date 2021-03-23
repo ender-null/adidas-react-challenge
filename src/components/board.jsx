@@ -42,7 +42,7 @@ export const Board = ({ step, onSuccess, onFail }) => {
 
   return (
     <div className="board">
-      <div className="status">
+      <div className="header">
         Step: <strong>{step}</strong>
       </div>
       <div

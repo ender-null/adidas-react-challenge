@@ -13,7 +13,7 @@ export const Ranking = ({ ranking, onNewGame }) => {
         {orderedRanking.map(([name, step], index) => {
           return (
             <li key={index}>
-              <strong>{name}</strong>: {step}
+              <strong>{name}</strong> {step}
             </li>
           );
         })}

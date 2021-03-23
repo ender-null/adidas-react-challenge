@@ -25,7 +25,7 @@ describe("end-game-dialog", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  test("should run call onSetName when clicked", () => {
+  test("should run call onSetName when input change", () => {
     const { getByRole } = render(
       <EndGameDialog onSetName={testOnSetName} step={24} />
     );

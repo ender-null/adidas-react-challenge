@@ -20,6 +20,7 @@ export const Board = ({ step, onSuccess, onFail }) => {
       <Tile
         key={index}
         style={style}
+        isDifferent={isDifferent}
         onClick={isDifferent ? onSuccess : onFail}
       />
     );

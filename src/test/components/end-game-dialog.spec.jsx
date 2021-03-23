@@ -27,10 +27,11 @@ describe("end-game-dialog", () => {
 
   test("should run call onSetName when input change", () => {
     const { getByRole } = render(
-      <EndGameDialog onSetName={testOnSetName} step={24} />
+      <EndGameDialog previousName="" onSetName={testOnSetName} step={24} />
     );
-    userEvent.type(getByRole("textbox"), "Name");
-    expect(getByRole("textbox")).toHaveValue("Name");
+    const input = getByRole("textbox");
+    userEvent.type(input, "Name");
+    expect(input).toHaveValue("Name");
     expect(testOnSetName).toBeCalled();
   });
 
@@ -45,13 +46,14 @@ describe("end-game-dialog", () => {
   test("should run call onAddEntry when clicked", () => {
     const { getByRole, getByText } = render(
       <EndGameDialog
+        previousName=""
         onSetName={testOnSetName}
         step={24}
         onAddEntry={testOnAddEntry}
       />
     );
     userEvent.type(getByRole("textbox"), "Name");
-    fireEvent.click(getByText("Accept"));
+    fireEvent.submit(getByText("Accept"));
     expect(testOnAddEntry).toBeCalled();
   });
 });

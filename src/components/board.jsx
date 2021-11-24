@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Tile } from "./tile.jsx";
 
 const BoardWidth = 320;
@@ -6,9 +6,9 @@ const BoardWidth = 320;
 export const Board = ({ step, onSuccess, onFail }) => {
   const [tiles, setTiles] = useState(null);
 
-  const getSize = () => step + 2;
+  const getSize = useCallback(() => {return step + 2}, [step]);
 
-  const createTile = (differentTileIndex, color) => (_, index) => {
+  const createTile = useCallback((differentTileIndex, color) => (_, index) => {
     const isDifferent = index === differentTileIndex;
     const style = {
       background: `hsl(${color}, 60%, ${isDifferent ? 65 : 50}%)`,
@@ -24,9 +24,9 @@ export const Board = ({ step, onSuccess, onFail }) => {
         onClick={isDifferent ? onSuccess : onFail}
       />
     );
-  };
+  }, [getSize, onSuccess, onFail])
 
-  function createTiles() {
+  const createTiles = useCallback(() => {
     const size = getSize();
     const totalSize = size * size;
     const highlightTile = Math.floor(Math.random() * totalSize);
@@ -35,11 +35,11 @@ export const Board = ({ step, onSuccess, onFail }) => {
       .fill(null)
       .map(createTile(highlightTile, color));
     setTiles(newTiles);
-  }
+  },[createTile, getSize])
 
   useEffect(() => {
     createTiles();
-  }, [step]);
+  }, [step, createTiles]);
 
   return (
     <div className="board">

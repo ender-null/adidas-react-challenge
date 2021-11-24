@@ -15,7 +15,7 @@ export const EndGameDialog = ({
 
   useEffect(() => {
     onSetName(name);
-  }, [name]);
+  }, [name, onSetName]);
 
   return (
     <div className="overlay">
